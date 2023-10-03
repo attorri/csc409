@@ -1,0 +1,47 @@
+using System;
+using System.Linq;
+
+namespace SuperAutoProfessionals
+{
+    public class Plumber : Professional
+    {
+        private Random random = new Random(); 
+
+        internal override bool On(Event e)
+        {
+            if (e.Code == EventCode.Die && e.Professional == this)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    var enemy = GetRandomEnemy();
+                    if (enemy != null)
+                    {
+                        Log($"Attacking {enemy} for 5");
+                        Game.Attack(enemy, 5);
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private Professional? GetRandomEnemy()
+        {
+            var enemies = EnemyTeam.Members.ToList();
+            if (enemies.Any())
+            {
+                int index = random.Next(enemies.Count);
+                return enemies[index];
+            }
+
+            return null;
+        }
+
+
+        public override string CodeName => "Pl";
+    }
+}
+
+// When died, attacks a random enemy for 5 (repeated 3 times)
