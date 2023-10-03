@@ -1,0 +1,31 @@
+// my idea 
+using System;
+
+namespace SuperAutoProfessionals
+{
+    public class Medic : Professional
+    {
+        internal override bool On(Event e)
+        {
+            if (e.Code == EventCode.Die && e.Professional == this)
+            {
+                
+                foreach (var teammate in Team.Members)
+                {
+                    if (teammate != this)
+                    {
+                        teammate.Health = Math.Max(teammate.Health - 1, 0); // Prevent health from being negative
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public override string CodeName => "Me";
+    }
+}
+
+// If the medic dies, all teammates will have their Health subtracted by 1
