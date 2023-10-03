@@ -1,0 +1,30 @@
+using System;
+
+namespace SuperAutoProfessionals
+{
+    public class Golfer : Professional
+    {
+        internal override bool On(Event e)
+        {
+            
+            if (e.Code == EventCode.BeforeAttack && e.Professional == this)
+            {
+                Attack += 1;
+                Log($"Increasing attack by 1 before the attack.");
+                return true;
+            }
+
+            
+            if (e.Code == EventCode.AfterAttack && e.Professional == this)
+            {
+                Attack += 1;
+                Log($"Increasing attack by 1 after the attack.");
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
+
+// Before and after attack, it gets +1 attack
