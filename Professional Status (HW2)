@@ -1,0 +1,88 @@
+// Change 'NotifyAll' in Game.cs to an internal void instead of a standard void.
+
+using System;
+using System.Collections.Generic;
+
+namespace SuperAutoProfessionals
+{
+    class ProfessionalStatus
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter left team professionals:");
+            List<Professional?> leftTeam = GetProfessionalsForTeam("left");
+
+            Console.WriteLine("\nEnter right team professionals:");
+            List<Professional?> rightTeam = GetProfessionalsForTeam("right");
+
+            Console.WriteLine("\nBattle Started!");
+            Team left = new Team(leftTeam, Side.Left);
+            Team right = new Team(rightTeam, Side.Right);
+            Game game = new Game(left, right);
+
+            game.NotifyAll(Event.StartOfBattle);
+
+            var winner = game.RunTurn();
+
+            Console.WriteLine(winner != null ? $"\n{winner} team wins!" : "\nThe battle ended in a draw.");
+            Console.ReadKey();
+
+        }
+
+        static List<Professional?> GetProfessionalsForTeam(string side)
+        {
+            List<Professional?> team = new List<Professional?>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine($"Enter {side} team professional at {i + 1}:");
+                Console.Write("Code Name: ");
+                string codeName = Console.ReadLine().Trim();
+
+                Professional? professional = CreateProfessionalByCodeName(codeName);
+                while (professional == null)
+                {
+                    Console.WriteLine("Invalid code name. Please try again.");
+                    Console.Write("Code Name: ");
+                    codeName = Console.ReadLine().Trim();
+                    professional = CreateProfessionalByCodeName(codeName);
+                }
+
+                team.Add(professional);
+            }
+
+            return team;
+        }
+
+        static Professional? CreateProfessionalByCodeName(string codeName)
+        {
+            switch (codeName)
+            {
+                case "Nu":
+                    return new Nurse();
+                case "Pr":
+                    return new Professional();
+                case "Tr":
+                    return new Trainer();
+                case "Bu":
+                    return new Buthcer();
+                case "Go":
+                    return new Golfer();
+                case "GD":
+                    return new GraveDigger();
+                case "LS":
+                    return new LoanShark();
+                case "Me":
+                    return new Medic();
+                case "Pl":
+                    return new Plumber();
+                case "Sa":
+                    return new Sailor();
+                case "YT":
+                    return new Youtuber();
+                default:
+                    return null;
+            }
+        }
+    }
+}
