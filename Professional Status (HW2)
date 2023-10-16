@@ -24,7 +24,6 @@ namespace SuperAutoProfessionals
             var winner = game.RunTurn();
 
             Console.WriteLine(winner != null ? $"\n{winner} team wins!" : "\nThe battle ended in a draw.");
-            Console.ReadKey();
 
         }
 
