@@ -60,8 +60,6 @@ namespace SuperAutoProfessionals
             {
                 case "Nu":
                     return new Nurse();
-                case "Pr":
-                    return new Professional();
                 case "Tr":
                     return new Trainer();
                 case "Bu":
@@ -80,6 +78,10 @@ namespace SuperAutoProfessionals
                     return new Sailor();
                 case "YT":
                     return new Youtuber();
+                case "Pr":
+                    return new Professional();
+                case "-":
+                    return null;
                 default:
                     return null;
             }
