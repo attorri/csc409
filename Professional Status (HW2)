@@ -1,5 +1,4 @@
 // Change 'NotifyAll' in Game.cs to an internal void instead of a standard void.
-
 using System;
 using System.Collections.Generic;
 
@@ -40,6 +39,10 @@ namespace SuperAutoProfessionals
                 string codeName = Console.ReadLine().Trim();
 
                 Professional? professional = CreateProfessionalByCodeName(codeName);
+                if (codeName == "-")
+                {
+                    professional = null;
+                }
                 while (professional == null)
                 {
                     Console.WriteLine("Invalid code name. Please try again.");
