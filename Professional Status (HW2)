@@ -83,8 +83,6 @@ namespace SuperAutoProfessionals
                     return new Youtuber();
                 case "Pr":
                     return new Professional();
-                case "-":
-                    return null;
                 default:
                     return null;
             }
